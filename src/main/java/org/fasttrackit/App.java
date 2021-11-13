@@ -32,15 +32,16 @@ public class App
 //        supplyDemandRepository.deleteSupplyDemand(1);
 
         //update method
+//        UpdateSupplyRequest requestu = new UpdateSupplyRequest();
+//        requestu.setValueRON(55);
+//        requestu.setDeliveryDate(LocalDate.now().plusWeeks(2));
+//        requestu.setCompleted(true);
+//
+//        supplyDemandRepository.updateSupplyDemand(2, requestu);
 
-        UpdateSupplyRequest requestu = new UpdateSupplyRequest();
-        requestu.setValueRON(55);
-        requestu.setDeliveryDate(LocalDate.now().plusWeeks(2));
-        requestu.setCompleted(true);
 
-        supplyDemandRepository.updateSupplyDemand(2, requestu);
-
-
+        //read method
+        System.out.println(supplyDemandRepository.getSupplies());
     }
 
 }
