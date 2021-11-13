@@ -2,7 +2,7 @@ package org.fasttrackit.domain;
 
 import java.time.LocalDate;
 
-public class Supplies {
+public class OfficeSupplies {
 
     private double id;
     private String department;
