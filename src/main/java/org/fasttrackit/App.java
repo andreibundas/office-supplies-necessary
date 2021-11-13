@@ -25,10 +25,12 @@ public class App
         request.setValueRON(80);
         request.setDeliveryDate(LocalDate.now().plusWeeks(2));
 
-        supplyDemandRepository.createSupplyDemand(request);
+//        supplyDemandRepository.createSupplyDemand(request);
+
+        supplyDemandRepository.deleteSupplyDemand(1);
+
+
 
     }
-
-
 
 }

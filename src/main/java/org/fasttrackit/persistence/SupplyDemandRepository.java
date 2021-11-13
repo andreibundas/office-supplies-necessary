@@ -25,4 +25,16 @@ public class SupplyDemandRepository {
         }
 
     }
+
+    public void deleteSupplyDemand(long id) throws SQLException {
+        String sql = "DELETE FROM supplies WHERE id = ? ";
+
+        try (PreparedStatement preparedStatement = DatabaseConfiguration.getConnection().prepareStatement(sql)) {
+            preparedStatement.setLong(1, id);
+
+            preparedStatement.executeUpdate();
+        }
+
+    }
+
 }
