@@ -2,6 +2,7 @@ package org.fasttrackit;
 
 import org.fasttrackit.persistence.SupplyDemandRepository;
 import org.fasttrackit.transfer.CreateSupplyRequest;
+import org.fasttrackit.transfer.UpdateSupplyRequest;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -19,16 +20,25 @@ public class App
         SupplyDemandRepository supplyDemandRepository = new SupplyDemandRepository();
 
         CreateSupplyRequest request = new CreateSupplyRequest();
-        request.setDepartment("Logistic");
-        request.setSupplies("Toner");
-        request.setQuantityPcsPckgs(1);
-        request.setValueRON(80);
-        request.setDeliveryDate(LocalDate.now().plusWeeks(2));
+//        request.setDepartment("Logistic");
+//        request.setSupplies("Toner");
+//        request.setQuantityPcsPckgs(1);
+//        request.setValueRON(80);
+//        request.setDeliveryDate(LocalDate.now().plusWeeks(2));
 
 //        supplyDemandRepository.createSupplyDemand(request);
 
-        supplyDemandRepository.deleteSupplyDemand(1);
+        // delete method
+//        supplyDemandRepository.deleteSupplyDemand(1);
 
+        //update method
+
+        UpdateSupplyRequest requestu = new UpdateSupplyRequest();
+        requestu.setValueRON(55);
+        requestu.setDeliveryDate(LocalDate.now().plusWeeks(2));
+        requestu.setCompleted(true);
+
+        supplyDemandRepository.updateSupplyDemand(2, requestu);
 
 
     }

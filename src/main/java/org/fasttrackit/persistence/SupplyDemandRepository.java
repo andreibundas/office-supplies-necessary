@@ -2,6 +2,7 @@ package org.fasttrackit.persistence;
 
 import org.fasttrackit.config.DatabaseConfiguration;
 import org.fasttrackit.transfer.CreateSupplyRequest;
+import org.fasttrackit.transfer.UpdateSupplyRequest;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -23,7 +24,6 @@ public class SupplyDemandRepository {
 
             preparedStatement.executeUpdate();
         }
-
     }
 
     public void deleteSupplyDemand(long id) throws SQLException {
@@ -36,5 +36,19 @@ public class SupplyDemandRepository {
         }
 
     }
+
+    public void updateSupplyDemand(long id, UpdateSupplyRequest request) throws SQLException {
+        String sql = "UPDATE supplies SET  value_RON = ?, delivery_date = ?, completed = ?  WHERE id = ? ";
+
+        try (PreparedStatement preparedStatement = DatabaseConfiguration.getConnection().prepareStatement(sql)) {
+            preparedStatement.setDouble(1, request.getValueRON());
+            preparedStatement.setDate( 2, Date.valueOf(request.getDeliveryDate()));
+            preparedStatement.setBoolean(3, request.isCompleted());
+            preparedStatement.setLong( 4, id);
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
 
 }
