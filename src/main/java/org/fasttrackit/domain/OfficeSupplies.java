@@ -11,6 +11,16 @@ public class OfficeSupplies {
     private double valueRON;
     private LocalDate deliveryDate;
     private boolean completed;
+    private double supplyPriceUnit;
+
+
+    public double calculateValueRON(double quantityPcsPckgs, double supplyPriceUnit ) {
+
+        double valueRON = quantityPcsPckgs * supplyPriceUnit;
+
+        return valueRON;
+    }
+
 
     public double getId() {
         return id;
@@ -66,6 +76,14 @@ public class OfficeSupplies {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public double getSupplyPriceUnit() {
+        return supplyPriceUnit;
+    }
+
+    public void setSupplyPriceUnit(double supplyPriceUnit) {
+        this.supplyPriceUnit = supplyPriceUnit;
     }
 
     @Override
