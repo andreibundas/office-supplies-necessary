@@ -14,7 +14,6 @@ public class DatabaseConfiguration {
     public static Connection getConnection() {
         if (connection == null) {
 
-
             InputStream inputStream = DatabaseConfiguration.class.getClassLoader()
                     .getResourceAsStream("application.properties");
 
@@ -40,10 +39,7 @@ public class DatabaseConfiguration {
                     System.out.println("Failed to close input stream");
                 }
             }
-
         }
-
         return connection;
-
     }
 }

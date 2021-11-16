@@ -3,11 +3,12 @@ package org.fasttrackit.transfer;
 import java.time.LocalDate;
 
 //DTO
-public class CreateSupplyRequest {
+public class SupplyRequest {
 
     private String department;
     private String supplies;
     private double quantityPcsPckgs;
+    private double quantityUnitPrice;
     private double valueRON;
     private LocalDate deliveryDate;
 
@@ -35,6 +36,14 @@ public class CreateSupplyRequest {
         this.quantityPcsPckgs = quantityPcsPckgs;
     }
 
+    public double getQuantityUnitPrice() {
+        return quantityUnitPrice;
+    }
+
+    public void setQuantityUnitPrice(double quantityUnitPrice) {
+        this.quantityUnitPrice = quantityUnitPrice;
+    }
+
     public double getValueRON() {
         return valueRON;
     }
@@ -57,6 +66,7 @@ public class CreateSupplyRequest {
                 "department='" + department + '\'' +
                 ", supplies='" + supplies + '\'' +
                 ", quantityPcsPckgs=" + quantityPcsPckgs +
+                ", quantityUnitPrice=" + quantityUnitPrice +
                 ", valueRON=" + valueRON +
                 ", deliveryDate=" + deliveryDate +
                 '}';

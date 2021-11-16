@@ -4,29 +4,25 @@ import java.time.LocalDate;
 
 public class OfficeSupplies {
 
-    private double id;
+    private long id;
     private String department;
-    private String supplies;
+    private String supplyName;
     private double quantityPcsPckgs;
+    private double supplyUnitPrice;
     private double valueRON;
     private LocalDate deliveryDate;
     private boolean completed;
-    private double supplyPriceUnit;
-
 
     public double calculateValueRON(double quantityPcsPckgs, double supplyPriceUnit ) {
-
         double valueRON = quantityPcsPckgs * supplyPriceUnit;
-
         return valueRON;
     }
 
-
-    public double getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(double id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,12 +34,12 @@ public class OfficeSupplies {
         this.department = department;
     }
 
-    public String getSupplies() {
-        return supplies;
+    public String getSupplyName() {
+        return supplyName;
     }
 
-    public void setSupplies(String supplies) {
-        this.supplies = supplies;
+    public void setSupplyName(String supplyName) {
+        this.supplyName = supplyName;
     }
 
     public double getQuantityPcsPckgs() {
@@ -78,21 +74,22 @@ public class OfficeSupplies {
         this.completed = completed;
     }
 
-    public double getSupplyPriceUnit() {
-        return supplyPriceUnit;
+    public double getSupplyUnitPrice() {
+        return supplyUnitPrice;
     }
 
-    public void setSupplyPriceUnit(double supplyPriceUnit) {
-        this.supplyPriceUnit = supplyPriceUnit;
+    public void setSupplyUnitPrice(double supplyUnitPrice) {
+        this.supplyUnitPrice = supplyUnitPrice;
     }
 
     @Override
     public String toString() {
-        return "Supplies{" +
+        return "OfficeSupplies{" +
                 "id=" + id +
                 ", department='" + department + '\'' +
-                ", supplies='" + supplies + '\'' +
+                ", supplyName='" + supplyName + '\'' +
                 ", quantityPcsPckgs=" + quantityPcsPckgs +
+                ", supplyUnitPrice=" + supplyUnitPrice +
                 ", valueRON=" + valueRON +
                 ", deliveryDate=" + deliveryDate +
                 ", completed=" + completed +

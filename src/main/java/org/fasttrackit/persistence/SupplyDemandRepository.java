@@ -2,8 +2,7 @@ package org.fasttrackit.persistence;
 
 import org.fasttrackit.config.DatabaseConfiguration;
 import org.fasttrackit.domain.OfficeSupplies;
-import org.fasttrackit.transfer.CreateSupplyRequest;
-import org.fasttrackit.transfer.UpdateSupplyRequest;
+import org.fasttrackit.transfer.SupplyRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,15 +12,17 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class SupplyDemandRepository {
 
-    public void createSupplyDemand(CreateSupplyRequest request) throws SQLException {
-        String sql = "INSERT INTO supplies (department, supplies, quantity_pcs_pckgs, value_RON, delivery_date) VALUES (?, ?, ?, ?, ?) ";
+    public void createSupplyDemand(SupplyRequest request) throws SQLException {
+        String sql = "INSERT INTO supplies (department, supplies, quantity_pcs_pckgs, quantity_unit_price, " +
+                "value_RON, delivery_date) VALUES (?, ?, ?, ?, ?, ?) ";
 
         try (PreparedStatement preparedStatement = DatabaseConfiguration.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, request.getDepartment());
             preparedStatement.setString( 2, request.getSupplies());
             preparedStatement.setDouble( 3, request.getQuantityPcsPckgs());
-            preparedStatement.setDouble( 4, request.getValueRON());
-            preparedStatement.setDate(5, Date.valueOf(request.getDeliveryDate()));
+            preparedStatement.setDouble( 4, request.getQuantityUnitPrice());
+            preparedStatement.setDouble( 5, request.getValueRON());
+            preparedStatement.setDate(6, Date.valueOf(request.getDeliveryDate()));
 
             preparedStatement.executeUpdate();
         }
@@ -35,24 +36,26 @@ public class SupplyDemandRepository {
 
             preparedStatement.executeUpdate();
         }
-
     }
 
-    public void updateSupplyDemand(long id, UpdateSupplyRequest request) throws SQLException {
-        String sql = "UPDATE supplies SET  value_RON = ?, delivery_date = ?, completed = ?  WHERE id = ? ";
+    public void updateSupplyDemand(long id, SupplyRequest request) throws SQLException {
+        String sql = "UPDATE supplies SET department = ?, supplies = ?, quantity_pcs_pckgs = ?, quantity_unit_price = ?, value_RON = ?, delivery_date = ?  WHERE id = ? ";
 
         try (PreparedStatement preparedStatement = DatabaseConfiguration.getConnection().prepareStatement(sql)) {
-            preparedStatement.setDouble(1, request.getValueRON());
-            preparedStatement.setDate( 2, Date.valueOf(request.getDeliveryDate()));
-            preparedStatement.setBoolean(3, request.isCompleted());
-            preparedStatement.setLong( 4, id);
+            preparedStatement.setString(1, request.getDepartment());
+            preparedStatement.setString( 2, request.getSupplies());
+            preparedStatement.setDouble( 3, request.getQuantityPcsPckgs());
+            preparedStatement.setDouble( 4, request.getQuantityUnitPrice());
+            preparedStatement.setDouble( 5, request.getValueRON());
+            preparedStatement.setDate( 6, Date.valueOf(request.getDeliveryDate()));
+            preparedStatement.setLong( 7, id);
 
             preparedStatement.executeUpdate();
         }
     }
 
     public List<OfficeSupplies> getSupplies() throws SQLException {
-        String sql = " SELECT id, department, supplies, quantity_pcs_pckgs, value_RON, delivery_date, " +
+        String sql = " SELECT id, department, supplies, quantity_pcs_pckgs, quantity_unit_price, value_RON, delivery_date, " +
                 "completed FROM supplies ";
 
         List<OfficeSupplies> supplies = new ArrayList<>();
@@ -64,8 +67,9 @@ public class SupplyDemandRepository {
                 OfficeSupplies supply = new OfficeSupplies();
                 supply.setId(resultSet.getLong("id"));
                 supply.setDepartment(resultSet.getString("department"));
-                supply.setSupplies(resultSet.getString("supplies"));
+                supply.setSupplyName(resultSet.getString("supplies"));
                 supply.setQuantityPcsPckgs(resultSet.getDouble("quantity_pcs_pckgs"));
+                supply.setSupplyUnitPrice(resultSet.getDouble("quantity_unit_price"));
                 supply.setValueRON((resultSet.getDouble("value_RON")));
                 supply.setDeliveryDate(resultSet.getDate("delivery_date").toLocalDate());
                 supply.setCompleted(resultSet.getBoolean("completed"));
