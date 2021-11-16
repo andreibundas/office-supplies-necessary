@@ -40,6 +40,7 @@ public class DatabaseConfiguration {
                 }
             }
         }
+
         return connection;
     }
 }
